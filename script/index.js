@@ -3,7 +3,10 @@
 const loadCategories = () => {
   fetch('https://openapi.programming-hero.com/api/phero-tube/categories')
     .then(response => response.json())
-    .then(data => displayCategories(data.categories))
+    .then(data => {
+      displayCategories(data.categories);
+
+    })
 
 }
 
@@ -17,7 +20,7 @@ const displayCategories = (categories) => {
     const btn = document.createElement('div');
 
     btn.innerHTML = `
-            <button onclick="" class="btn btn-sm font-semibold text-lg hover:bg-[#FF1F3D] text-[#25252570] bg-[#25252515] hover:text-white sm:flex sm:justify-center">
+            <button onclick="difference(${cate.category_id})" class="btn btn-sm font-semibold text-lg hover:bg-[#FF1F3D] text-[#25252570] bg-[#25252515] hover:text-white sm:flex sm:justify-center">
               ${cate.category}
             </button>
           `;
@@ -43,9 +46,27 @@ const displayVideos = (videos) => {
 
   const videoContainer = document.getElementById('videosContainer');
 
+  videoContainer.innerHTML="";
+  if(videos.length==0){
+
+      videoContainer.innerHTML=`
+
+      <div class="mx-auto col-span-4 mt-10 row-span-4 space-y-3">
+        <img src="asset/Icon.png" alt="" class="mx-auto">
+        <h1 class="text-center text-2xl font-bold  ">Oops!! Sorry, There is no content here</h1>
+       </div>
+
+      `
+      return ;
+    }
+
   videos.forEach(element => {
 
     const videoCard = document.createElement('div');
+
+    
+
+
 
 
 //   {
@@ -111,4 +132,18 @@ const allBtn =document.getElementById('allVideo').addEventListener('click',()=>{
     loadVideos();
 });
 
+
+// for difference videoDisplay 
+
+const difference = (categoryID)=>{
+
+  console.log(categoryID)
+  
+  const url = `https://openapi.programming-hero.com/api/phero-tube/category/${categoryID}`;
+  fetch(url)
+  .then(response => response.json())
+  .then(data => displayVideos(data.category))
+
+
+}
 
