@@ -56,6 +56,12 @@ const loadVideos = () => {
 
 }
 
+// here start show details button to show details
+
+const loadDetails=(videoId)=>{
+      
+}
+
 const displayVideos = (videos) => {
 
   const videoContainer = document.getElementById('videosContainer');
@@ -104,6 +110,8 @@ const displayVideos = (videos) => {
                     <p class="text-[#17171770] flex gap-x-1">${element.others.views} <img src="https://img.icons8.com/?size=100&id=98A4yZTt9abw&format=png&color=000000" alt="" class="w-6 h-6"></p>
                 </div>
             </div>
+
+            <button class="btn font-bold text-lg w-40 mx-auto my-5">Show Details</button>
         </div>
 
       `;
@@ -140,4 +148,8 @@ const difference = (categoryID)=>{
 
 
 }
+
+
+
+
 
