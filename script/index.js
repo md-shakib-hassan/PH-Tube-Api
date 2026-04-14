@@ -73,7 +73,6 @@ const displayDetails = (data) => {
       `
 }
 
-
 // here api call for videos data 
 
 const loadVideos = () => {
@@ -136,8 +135,8 @@ const displayVideos = (videos) => {
 
                 <div class="">
                     <h3 class="font-bold text-lg ">${element.title}</h3>
-                    <p class="text-[#17171770]">${element.authors[0].profile_name}</p>
-                    <p class="text-[#17171770] flex gap-x-1">${element.others.views} <img src="https://img.icons8.com/?size=100&id=98A4yZTt9abw&format=png&color=000000" alt="" class="w-6 h-6"></p>
+                    <p class="text-[#17171770] flex ">${element.authors[0].profile_name} ${element.authors.verified == true } <img src="https://img.icons8.com/?size=100&id=98A4yZTt9abw&format=png&color=000000" alt="" class="w-6 h-6 space-x-2"> </p>
+                    <p class="text-[#17171770] flex gap-x-1">${element.others.views} </p>
                 </div>
             </div>
 
