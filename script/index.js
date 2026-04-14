@@ -9,12 +9,12 @@ const loadCategories = () => {
 
 }
 
-const removeActiveClass=()=>{
-   const activeBtn = document.getElementsByClassName("active");
+const removeActiveClass = () => {
+  const activeBtn = document.getElementsByClassName("active");
 
-   for(btn of activeBtn){
+  for (btn of activeBtn) {
     btn.classList.remove("active");
-   }
+  }
 
 }
 
@@ -38,6 +38,39 @@ const displayCategories = (categories) => {
   }
 }
 
+// here start show details button to show details
+
+const loadDetails = (videoId) => {
+
+  const url = ` https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`;
+  fetch(url)
+    .then(response => response.json())
+    .then(data => displayDetails(data));
+
+}
+
+const displayDetails = (data) => {
+
+  console.log(data);
+  const detailsContainer = document.getElementById('videoDetails').showModal();
+  
+  detailsContainer.innerHTML = `
+      <div>
+
+      <img
+      src="${data.thumbnail}"
+      alt="Shoes" />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title">Card Title</h2>
+    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+    
+  </div>
+      
+      </div>
+      
+      `
+}
 
 
 // here api call for videos data 
@@ -50,26 +83,22 @@ const loadVideos = () => {
       removeActiveClass();
 
       document.getElementById('allVideo').classList.add("active");
-      
+
       displayVideos(data.videos)
     })
 
 }
 
-// here start show details button to show details
 
-const loadDetails=(videoId)=>{
-      
-}
 
 const displayVideos = (videos) => {
 
   const videoContainer = document.getElementById('videosContainer');
 
-  videoContainer.innerHTML="";
-  if(videos.length==0){
+  videoContainer.innerHTML = "";
+  if (videos.length == 0) {
 
-      videoContainer.innerHTML=`
+    videoContainer.innerHTML = `
 
       <div class="mx-auto col-span-4 mt-10 row-span-4 space-y-3">
         <img src="asset/Icon.png" alt="" class="mx-auto">
@@ -77,14 +106,14 @@ const displayVideos = (videos) => {
        </div>
 
       `
-      return ;
-    }
+    return;
+  }
 
   videos.forEach(element => {
 
     const videoCard = document.createElement('div');
 
-    
+
 
     videoCard.innerHTML = `
 
@@ -111,7 +140,7 @@ const displayVideos = (videos) => {
                 </div>
             </div>
 
-            <button class="btn font-bold text-lg w-40 mx-auto my-5">Show Details</button>
+            <button onclick="loadDetails('${element.video_id}')" class="btn font-bold text-lg w-40 mx-auto my-5">Show Details</button>
         </div>
 
       `;
@@ -129,22 +158,22 @@ loadCategories();
 
 // for difference videoDisplay 
 
-const difference = (categoryID)=>{
+const difference = (categoryID) => {
 
   console.log(categoryID)
-  
+
   const url = `https://openapi.programming-hero.com/api/phero-tube/category/${categoryID}`;
   fetch(url)
-  .then(response => response.json())
-  .then(data => {
+    .then(response => response.json())
+    .then(data => {
 
-    removeActiveClass();  
-    const activeBtn = document.getElementById(`btn${categoryID}`);
-    activeBtn.classList.add("active");
-    displayVideos(data.category)
+      removeActiveClass();
+      const activeBtn = document.getElementById(`btn${categoryID}`);
+      activeBtn.classList.add("active");
+      displayVideos(data.category)
 
-    
-  })
+
+    })
 
 
 }
