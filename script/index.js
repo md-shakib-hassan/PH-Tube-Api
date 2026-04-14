@@ -52,22 +52,23 @@ const loadDetails = (videoId) => {
 const displayDetails = (data) => {
 
   console.log(data);
-  const detailsContainer = document.getElementById('videoDetails').showModal();
-  
-  detailsContainer.innerHTML = `
-      <div>
+  document.getElementById('videoDetails').showModal();
 
-      <img
-      src="${data.thumbnail}"
-      alt="Shoes" />
+  const detailsContainer = document.getElementById('detailsContainer');
+
+  detailsContainer.innerHTML = `
+    
+  <figure>
+    <img
+      src="${data.video.thumbnail}"
+      alt="thumbnail" />
   </figure>
   <div class="card-body">
-    <h2 class="card-title">Card Title</h2>
-    <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+    <h2 class="card-title">${data.video.title}</h2>
+    <p>${data.video.description}</p>
     
   </div>
-      
-      </div>
+
       
       `
 }
