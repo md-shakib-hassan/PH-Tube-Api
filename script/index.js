@@ -75,9 +75,9 @@ const displayDetails = (data) => {
 
 // here api call for videos data 
 
-const loadVideos = () => {
+const loadVideos = (searchtText = "") => {
 
-  fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
+  fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchtText}`)
     .then(response => response.json())
     .then(data => {
       removeActiveClass();
@@ -184,7 +184,7 @@ document.getElementById("searchInput").addEventListener('keyup',(e)=>{
 
   const input = e.target.value;
 
-  console.log(input);
+  loadVideos(input);
 
 })
 
